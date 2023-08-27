@@ -1,6 +1,6 @@
 import React from 'react';
 import {  FaCalendar, FaComments, FaLayerGroup, FaPaperclip } from "react-icons/fa";
-const Card = ({users}) => {
+const Card = ({users,fileHandler,quantity,attachmentNum}) => {
     const {name,pic,comment,date}=users;
     return (
      
@@ -35,12 +35,14 @@ const Card = ({users}) => {
       <div className='flex items-center gap-2 text-slate-600'>
           <FaComments/><span>{comment}</span>
       </div>
-      <div>
-      <input  type="file" id="my_file_input" style={{display:"none"}}/>
+     
+      <form onClick={attachmentNum} action="">
+      <input onChange={fileHandler} name='file' multiple type="file" id="my_file_input" style={{display:"none"}}/>
 <label className='flex items-center text-slate-600 gap-2' htmlFor="my_file_input">
- <FaPaperclip/><span>{"25"}</span>
+ <FaPaperclip/><span>{quantity}</span>
 </label>
-      </div>
+      </form>
+     
       <div className='flex items-center gap-2 text-slate-600'>
           <FaCalendar/><span>{date}</span>
       </div>

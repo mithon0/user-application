@@ -5,10 +5,41 @@ import Card from './Card/Card';
 
 function App() {
   const [user,setUser]=useState([]);
+  const [file,setFile]=useState();
+  const [quantity,setQuantity]=useState(25)
 
+  const attachmentNum =()=>{
+    setQuantity((prev) => prev + 1)
+  }
+
+  const fileHandler=(e)=>{
+  
+    const reader =new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload=()=>{
+         
+          setFile(reader?.result) 
+         
+          const files ={"file":quantity}
+
+          fetch("http://localhost:5000/users",{
+            method:"PUT",
+            headers:{
+              "content-type":"application/json"
+            },
+            body:JSON.stringify(files)
+          })
+          .then(res=>res.json())
+          .then(data=>console.log(data))
+        }
+
+
+
+  }
+ 
   useEffect(()=>{
 
-    fetch('user.json')
+    fetch('http://localhost:5000/user')
     .then(res=>res.json())
     .then(data=>setUser(data))
   },[])
@@ -28,6 +59,9 @@ function App() {
        <div className='snap-y  scroll-p-0.5 scroll-smooth ss'>
        {
           user.map(users=><Card
+            attachmentNum={attachmentNum}
+            quantity={quantity}
+            fileHandler={fileHandler}
           key={users.name}
           users={users}
           ></Card>)
@@ -49,6 +83,9 @@ function App() {
        <div className='snap-y  scroll-p-0.5 scroll-smooth ss'>
        {
           user.map(users=><Card
+            attachmentNum={attachmentNum}
+          quantity={quantity}
+            fileHandler={fileHandler}
           key={users.name}
           users={users}
           ></Card>)
@@ -70,6 +107,9 @@ function App() {
        <div className='snap-y  scroll-p-0.5 scroll-smooth ss'>
        {
           user.map(users=><Card
+            attachmentNum={attachmentNum}
+            quantity={quantity}
+            fileHandler={fileHandler}
           key={users.name}
           users={users}
           ></Card>)
@@ -92,6 +132,9 @@ function App() {
        <div className='snap-y  scroll-p-0.5 scroll-smooth ss'>
        {
           user.map(users=><Card
+            attachmentNum={attachmentNum}
+            quantity={quantity}
+            fileHandler={fileHandler}
           key={users.name}
           users={users}
           ></Card>)
@@ -114,6 +157,9 @@ function App() {
        <div className='snap-y  scroll-p-0.5 scroll-smooth ss'>
        {
           user.map(users=><Card
+            attachmentNum={attachmentNum}
+            quantity={quantity}
+            fileHandler={fileHandler}
           key={users.name}
           users={users}
           ></Card>)
