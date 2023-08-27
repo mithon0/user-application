@@ -22,7 +22,7 @@ function App() {
          
           const files ={"file":quantity}
 
-          fetch("http://localhost:5000/users",{
+          fetch("https://user-application-server-mithon0.vercel.app/users",{
             method:"PUT",
             headers:{
               "content-type":"application/json"
@@ -39,7 +39,7 @@ function App() {
  
   useEffect(()=>{
 
-    fetch('http://localhost:5000/user')
+    fetch('https://user-application-server-mithon0.vercel.app/user')
     .then(res=>res.json())
     .then(data=>setUser(data))
   },[])
